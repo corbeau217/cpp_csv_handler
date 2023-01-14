@@ -42,6 +42,7 @@ namespace CorbSheet {
      * 
      * @brief for the placement of an element in the ui, requiring fields to be references
      */
+    // apparently this doesnt work how we want it
     typedef struct RefSpace {
         float &x;                // space top-left corner position x
         float &y;                // space top-left corner position y
@@ -167,9 +168,11 @@ namespace CorbSheet {
         int colCount,rowCount;
         // header checkers
         bool hasColHeader,hasRowHeader;
-        // // the cells we're using, [y][x] or [row][col]
-        // vector<vector<CorbCell*>> cells;
-        // TODO implement this as the new storage
+        // TODO update to use references so we can have
+        //      cell specific information
+        // the cells we're using, [y][x] or [row][col]
+        vector<vector<CorbCell*>> cells;
+        // TODO remove this as the data storage
         // data held by each cell
         vector<vector<string>> cellVals;
         

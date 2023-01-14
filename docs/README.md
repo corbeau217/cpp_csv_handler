@@ -28,6 +28,9 @@
 
 <h2>Useful to user</h2>
 <code>At some point we should update this section to include information useful to users of this client</code>
+<!-- add in to this section information about the folders needed and placement of files -->
+<!-- folders needed in workspace folder: build, external, resources -->
+<!--    inside 'external' folder we need the 'raygui-3.2', and 'raylib-4.2.0', for cmake -->
 
 <!-- ===================================================================================== -->
 <hr /><!-- =============================================================================== -->
@@ -208,6 +211,9 @@
                     <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[01:32pm]</code> ---> <i>added in <code>RefSpace</code> which is a copy of <code>raylib</code>'s <code>Rectangle</code> structure but takes references</i></li>
                     <li><code>[01:32pm]</code> ---> <i>prepared directory for initial repository push to track further changes during spelling correction/refactoring to have cell use references</i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[02:04pm]</code> ---> <i>added a testing section to <code>./Main.cpp</code></i></li>
+                    <li><code>[03:07pm]</code> ---> <i>provided some tested data for address containers in <code>./Main.cpp</code></i></li>
                     <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>

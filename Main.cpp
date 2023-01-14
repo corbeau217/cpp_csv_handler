@@ -44,6 +44,7 @@ using namespace std;
 // #define DUMP_ALL_TABLE_DATA
 // #define DUMP_ALL_FIELD_DATA
 #define USE_APP_HANDLE
+// #define DO_TESTING_STUFFERS
 
 
 
@@ -376,6 +377,92 @@ void appHandle(){
 }
 
 
+#ifdef DO_TESTING_STUFFERS
+
+// /**
+//  * @brief float dealer,
+//  * @brief expected behaviour:  instance copy that creates a stable reference
+//  * @brief actual   behaviour:  creates stack memory and doesnt let us return as reference
+//  * @param floatRefIn it's a float reference
+//  * 
+//  * @return float& reference to a local 'float' initialised from 'floatRefIn'
+//  */
+// float& floatDealer( float& floatRefIn ){
+//     float newFloatRef = floatRefIn;
+//     return newFloatRef;
+// }
+
+/**
+ * @brief float dealer,
+ * @brief expected behaviour:  turns magic number into a volatile reference
+ * @brief actual   behaviour:  fits in 'float' but not 'float &', instance copy
+ * 
+ * @return float 1.23f
+ */
+float floatDealer(){
+    return 1.23f;
+}
+/**
+ * @brief float dealer,
+ * @brief expected behaviour:  reference return of reference copy
+ * @brief actual   behaviour:  
+ * @param floatRefIn it's a float reference
+ * 
+ * @return float& reference to a local 'float' initialised from 'floatRefIn'
+ */
+float& floatDealerUnstack( float& floatRefIn ){
+    float &newFloatRef = floatRefIn;
+    return newFloatRef;
+}
+/**
+ * @brief float dealer,
+ * @brief expected behaviour:  instance copy that creates a volatile reference
+ * @brief actual   behaviour:  instance copy at the time of the call
+ * @param floatRefIn reference to a float value
+ * 
+ * @return float value that was initialised locally and just sending back the value?
+ */
+float floatDealerUnref( float& floatRefIn ){
+    float newFloatRef = floatRefIn;
+    return newFloatRef;
+}
+/**
+ * @brief float dealer,
+ * @brief expected behaviour:  modifies all floats linked
+ * @brief actual   behaviour:  works as intended
+ * @param floatRefIn reference to a float value
+ * 
+ */
+void floatDealerAdder( float& floatRefIn ){
+    floatRefIn += 1.0f;
+}
+/**
+ * @brief float dealer,
+ * @brief expected behaviour:  changes the float completely
+ * @brief actual   behaviour:  changes the float value for all floats linked
+ * @param floatRefIn reference to a float value
+ * 
+ */
+void floatDealerChanger( float& floatRefIn ){
+    float newFloater = 7.46f;
+    floatRefIn = newFloater;
+}
+/**
+ * @brief float dealer,
+ * @brief expected behaviour:  changes the float reference linkage completely
+ * @brief actual   behaviour:  no difference, still changes all variables linked to that address
+ * @param floatRefIn reference to a float value
+ * 
+ */
+void floatDealerChanger2( float& floatRefIn ){
+    float newFloater = 7.46f;
+    float &newFloater2 = newFloater;
+    floatRefIn = newFloater2;
+}
+
+#endif
+
+
 /**
  * @brief main landing point for our program
  * 
@@ -494,6 +581,95 @@ int main(int argc, char **argv){
     cout << consoleSpacerLine << consoleSpacerLine << consoleSpacerLine << endl << endl << endl;
 
     appHandle();
+
+    #endif
+
+    // "==== ==== ==== ==== ==== ==== ==== ==== ==== ===="
+    // "==== ==== ==== ==== ==== ==== ==== ==== ==== ===="
+    // "==== ==== ==== ==== ==== ==== ==== ==== ==== ===="
+
+    #ifdef DO_TESTING_STUFFERS
+
+    // // try magic number
+    // float stdFloatMagic         = 1.78f;
+    // try magic number
+    float stdFloatMagic2        = 3.67f;
+    // // try return
+    // float stdFloatReturn        = floatDealer();
+    // // try assign existing float ---> instance copies at the time of declaration
+    // float stdFloatCopyMagic     = stdFloatMagic;
+    // // try copy from passed reference ---> instance copies on call
+    // float stdFloatCopyMagicFunc = floatDealerUnref( stdFloatMagic );
+
+    // [IDE error] [attempt with inline as well] [not left hand value]
+    // // try copy return
+    // float &refFloatReturn    = floatDealer();
+    // [IDE error] [attempt with inline as well] [not left hand value]
+    // // try copy from passed reference
+    // float &refFloatCopyMagicFunc = floatDealerUnref( stdFloatMagic );
+
+    // // try copy by reference
+    // float &refFloatCopyMagic = stdFloatMagic;
+    // // try get from created reference
+    // float &refFloatCopyMagicFuncRef = floatDealerUnstack( stdFloatMagic );
+    // // try add to the float
+    // float &refFloatCopyMagicAdd = stdFloatMagic2;
+
+    // try change the float function scope
+    float &refFloatCopyMagicChanger = stdFloatMagic2;
+    floatDealerChanger( refFloatCopyMagicChanger );
+
+    // now we see what the values are
+
+    cout << endl << consoleSpacerLine << endl;
+    cout << consoleSpacerLine << endl << endl;
+    // cout << "stdFloatMagic:            | " << to_string( stdFloatMagic            ) << endl;
+    cout << "stdFloatMagic2:           | " << to_string( stdFloatMagic2           ) << endl;
+    // cout << "stdFloatReturn:           | " << to_string( stdFloatReturn           ) << endl;
+    // cout << "stdFloatCopyMagic:        | " << to_string( stdFloatCopyMagic        ) << endl;
+    // cout << "stdFloatCopyMagicFunc:    | " << to_string( stdFloatCopyMagicFunc    ) << endl;
+    // cout << consoleSpacerLine << endl;
+    // cout << "refFloatCopyMagic:        | " << to_string( refFloatCopyMagic        ) << endl;
+    // cout << "refFloatCopyMagicFuncRef: | " << to_string( refFloatCopyMagicFuncRef ) << endl;
+    // cout << "refFloatCopyMagicAdd:     | " << to_string( refFloatCopyMagicAdd     ) << endl;
+    cout << "refFloatCopyMagicChanger: | " << to_string( refFloatCopyMagicChanger ) << endl;
+    cout << consoleSpacerLine << endl << endl;
+
+    // change the magic numbers
+    // stdFloatMagic  = 2.15f;
+    stdFloatMagic2 = 6.95f;
+
+    cout << endl << consoleSpacerLine << endl;
+    cout << consoleSpacerLine << endl << endl;
+    // cout << "stdFloatMagic:            | " << to_string( stdFloatMagic            ) << endl;
+    cout << "stdFloatMagic2:           | " << to_string( stdFloatMagic2           ) << endl;
+    // cout << "stdFloatReturn:           | " << to_string( stdFloatReturn           ) << endl;
+    // cout << "stdFloatCopyMagic:        | " << to_string( stdFloatCopyMagic        ) << endl;
+    // cout << "stdFloatCopyMagicFunc:    | " << to_string( stdFloatCopyMagicFunc    ) << endl;
+    // cout << consoleSpacerLine << endl;
+    // cout << "refFloatCopyMagic:        | " << to_string( refFloatCopyMagic        ) << endl;
+    // cout << "refFloatCopyMagicFuncRef: | " << to_string( refFloatCopyMagicFuncRef ) << endl;
+    // cout << "refFloatCopyMagicAdd:     | " << to_string( refFloatCopyMagicAdd     ) << endl;
+    cout << "refFloatCopyMagicChanger: | " << to_string( refFloatCopyMagicChanger ) << endl;
+    cout << consoleSpacerLine << endl << endl;
+
+    // functions yey
+    // floatDealerAdder( refFloatCopyMagicAdd );
+    floatDealerChanger2( refFloatCopyMagicChanger );
+
+    cout << endl << consoleSpacerLine << endl;
+    cout << consoleSpacerLine << endl << endl;
+    // cout << "stdFloatMagic:            | " << to_string( stdFloatMagic            ) << endl;
+    cout << "stdFloatMagic2:           | " << to_string( stdFloatMagic2           ) << endl;
+    // // cout << "stdFloatReturn:           | " << to_string( stdFloatReturn           ) << endl;
+    // // cout << "stdFloatCopyMagic:        | " << to_string( stdFloatCopyMagic        ) << endl;
+    // // cout << "stdFloatCopyMagicFunc:    | " << to_string( stdFloatCopyMagicFunc    ) << endl;
+    // cout << consoleSpacerLine << endl;
+    // cout << "refFloatCopyMagic:        | " << to_string( refFloatCopyMagic        ) << endl;
+    // cout << "refFloatCopyMagicFuncRef: | " << to_string( refFloatCopyMagicFuncRef ) << endl;
+    // cout << "refFloatCopyMagicAdd:     | " << to_string( refFloatCopyMagicAdd     ) << endl;
+    cout << "refFloatCopyMagicChanger: | " << to_string( refFloatCopyMagicChanger ) << endl;
+    // cout << consoleSpacerLine << endl << endl;
 
     #endif
 
