@@ -69,8 +69,18 @@ namespace CorbSheet {
         // ==== ==== ==== ====  ==== ==== ==== ==== 
         // member vars
 
-        // the space occupied by this cell
-        Rectangle space;
+        // // the space occupied by this cell
+        // Rectangle space;
+
+        // position var holding a reference to the column's position
+        float &colPosX;
+        // position var holding a reference to the row's position
+        float &rowPosY;
+        // width var holding a reference to the column's size
+        float &colSizeWidth;
+        // height var holding a reference to the row's size
+        float &rowSizeHeight;
+
         // grid positioning fields
         int col,row;
         // the label string this cell has
@@ -81,11 +91,16 @@ namespace CorbSheet {
         // ==== ==== ==== ====  ==== ==== ==== ==== 
         // constructors/destructors
 
+        // /**
+        //  * @brief constructor
+        //  * 
+        //  */
+        // CorbCell(Rectangle spaceIn, int xIdxIn, int yIdxIn);
         /**
          * @brief constructor
          * 
          */
-        CorbCell(Rectangle spaceIn, int xIdxIn, int yIdxIn);
+        CorbCell(float &colPosIn, float &rowPosIn, float &colSizeIn, float &rowSizeIn, int xIdxIn, int yIdxIn);
 
         // ---- ---- ---- ----  ---- ---- ---- ---- 
         /**
@@ -346,13 +361,31 @@ namespace CorbSheet {
     // ==== ==== ==== ====  ==== ==== ==== ====  ==== ==== ==== ====  
     // ==== ==== ==== ====  ==== ==== ==== ====  ==== ==== ==== ====  
 
+    // /**
+    //  * @brief constructor
+    //  * 
+    //  */
+    // CorbCell::CorbCell(Rectangle spaceIn, int xIdxIn, int yIdxIn){
+    //     // initialise the space as instance copy of the spaceIn
+    //     space = { spaceIn.x, spaceIn.y, spaceIn.width, spaceIn.height };
+    //     // initialise col index
+    //     col = xIdxIn;
+    //     // initialise row index
+    //     row = yIdxIn;
+    //     // initialise the value
+    //     value = "";
+    // }
     /**
      * @brief constructor
      * 
      */
-    CorbCell::CorbCell(Rectangle spaceIn, int xIdxIn, int yIdxIn){
-        // initialise the space as instance copy of the spaceIn
-        space = { spaceIn.x, spaceIn.y, spaceIn.width, spaceIn.height };
+    CorbCell::CorbCell( float &colPosIn, float &rowPosIn, float &colSizeIn, float &rowSizeIn, int xIdxIn, int yIdxIn ) :
+        // initialise the address holders for col/row pos/size
+        colPosX {colPosIn},
+        rowPosY {rowPosIn},
+        colSizeWidth {colSizeIn},
+        rowSizeHeight {rowSizeIn}
+    {
         // initialise col index
         col = xIdxIn;
         // initialise row index
@@ -413,22 +446,36 @@ namespace CorbSheet {
         // RAYLIB ONLY version
 
         // // draw the space
-        // DrawRectangleRec(space,WHITE);
-        // // draw the outline
-        // DrawRectangleLines(
-        //     // pos
-        //     static_cast<int>(space.x),static_cast<int>(space.y),
-        //     // size
-        //     static_cast<int>(space.width),static_cast<int>(space.height),
-        //     BLACK
-        // );
+        DrawRectangle(
+            // pos
+            static_cast<int>(colPosX),static_cast<int>(rowPosY),
+            // size
+            static_cast<int>(colSizeWidth),static_cast<int>(rowSizeHeight),
+            WHITE
+        );
+        // draw the outline
+        DrawRectangleLines(
+            // pos
+            static_cast<int>(colPosX),static_cast<int>(rowPosY),
+            // size
+            static_cast<int>(colSizeWidth),static_cast<int>(rowSizeHeight),
+            BLACK
+        );
+        // draw the text
+        DrawText(
+            getDrawableText().c_str(),
+            static_cast<int>(colPosX),static_cast<int>(rowPosY),
+            10,BLACK
+        );
         // DrawText("TEMPLATE",GetScreenWidth()/2-100,GetScreenHeight()/2,10,BLACK);
 
         // RAYGUI version
-        // draw the cell background
-        GuiDrawRectangle(space,1,DARKGRAY,WHITE);
-        // draw the text
-        GuiLabel( space, getDrawableText().c_str() );
+        // // draw the cell background
+        // GuiDrawRectangle(space,1,DARKGRAY,WHITE);
+        // // draw the text
+        // GuiLabel( space, getDrawableText().c_str() );
+        // // what it calls
+        // GuiDrawText(text, GetTextBounds(LABEL, bounds), GuiGetStyle(LABEL, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(LABEL, TEXT + (state*3))), guiAlpha));
     }
     
     // ==== ==== ==== ====  ==== ==== ==== ====  ==== ==== ==== ====  
@@ -496,8 +543,8 @@ namespace CorbSheet {
         // comment out the cells initialisation
         // for every row
         for( int currRow = 0; currRow < rowCount; currRow++ ){
-            // // initialise the row list
-            // vector<CorbCell*> currCellRow;
+            // initialise the row list
+            vector<CorbCell*> currCellRow;
             // initialise the curr row list
             vector<string> currRowVals;
 
@@ -512,18 +559,18 @@ namespace CorbSheet {
                 //     colSize[ currCol ], rowSize[ currRow ]
                 // };
                 // //...
-                // // initialise the curr cell instance pointer
-                // CorbCell *currCell = new CorbCell( currCellSpace, currCol, currRow );
+                // initialise the curr cell instance pointer
+                CorbCell *currCell = new CorbCell( colPos[ currCol ], rowPos[ currRow ], colSize[ currCol ], rowSize[ currRow ], currCol, currRow );
 
-                // // push to the row list
-                // currCellRow.push_back( currCell );
+                // push to the row list
+                currCellRow.push_back( currCell );
 
                 // push junk to the row vals
                 currRowVals.push_back( "" );
             }
 
-            // // push the row to the overall cells list
-            // cells.push_back( currCellRow );
+            // push the row to the overall cells list
+            cells.push_back( currCellRow );
 
             // push the row vals list to overall vals
             cellVals.push_back( currRowVals );
@@ -539,11 +586,11 @@ namespace CorbSheet {
     CorbGrid::~CorbGrid(){
         // delete all the cells
 
-        // for(int y = 0; y < rowCount; y++ ){
-        //     for(int x = 0; x < colCount; x++){
-        //         delete cells[y][x];
-        //     }
-        // }
+        for(int y = 0; y < rowCount; y++ ){
+            for(int x = 0; x < colCount; x++){
+                delete cells[y][x];
+            }
+        }
 
     }
 
@@ -602,22 +649,22 @@ namespace CorbSheet {
             // for every col fully within the veiw space
             for( int currCol = veiwingCol; ( currCol < colCount ) &&
             ( ( colPos[currCol] + colSize[currCol] ) - colPos[ veiwingCol ] ) < space.width; currCol++ ){
-                // // tell the cell to draw
-                // getCell(currCol,currRow)->draw();
+                // tell the cell to draw
+                cells[currRow][currCol]->draw();
 
-                // prepare the current cell space
-                Rectangle currCellSpace {
-                    colPos[currCol] - colPos[ veiwingCol] + space.x,
-                    rowPos[currRow] - rowPos[ veiwingRow] + space.y,
-                    colSize[currCol],
-                    rowSize[currRow],
-                };
+                // // prepare the current cell space
+                // Rectangle currCellSpace {
+                //     colPos[currCol] - colPos[ veiwingCol] + space.x,
+                //     rowPos[currRow] - rowPos[ veiwingRow] + space.y,
+                //     colSize[currCol],
+                //     rowSize[currRow],
+                // };
 
-                // RAYGUI version
-                // draw the cell background
-                GuiDrawRectangle( currCellSpace, 1, DARKGRAY, WHITE );
-                // draw the text
-                GuiLabel( currCellSpace, getDrawableText( getCell( currCol, currRow ) ).c_str() );
+                // // RAYGUI version
+                // // draw the cell background
+                // GuiDrawRectangle( currCellSpace, 1, DARKGRAY, WHITE );
+                // // draw the text
+                // GuiLabel( currCellSpace, getDrawableText( getCell( currCol, currRow ) ).c_str() );
 
             }
         }

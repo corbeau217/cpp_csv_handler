@@ -221,6 +221,22 @@
                 </ul>
             </details>
         </li>
+        <li><code>[16/01/23]</code> ---> <i>reimplementing the <code>CorbCell</code> objects</i>
+            <details>
+                <summary><i>show / hide</i></summary>
+                <ul>
+                    <li><code> ===== ===== ===== ===== ===== </code></li>
+                    <li><code>[01:51pm]</code> ---> <i>restructured <code>CorbCell</code> to use a shared reference member for position/size based on col/row</i></li>
+                    <li><code>[01:51pm]</code> ---> <i>restructured <code>CorbCell</code> draw method to use <code>raylib</code> methods so each cell isnt required to have a rectangle member</i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code> ===== ===== ===== ===== ===== </code></li>
+                </ul>
+            </details>
+        </li>
         <li></li>
         <li></li>
     </ul>
@@ -367,6 +383,8 @@
         <!-- ---------------------------------------- -->
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[13/01/23][05:09pm]</code> ---> <code>CorbGrid</code> ---> <i>change to using a <code>CorbRectangle</code> or <code>CorbCellDrawLocation</code></i></li>
+        <li><code>[16/01/23][01:05pm]</code> ---> <code>CorbCell</code> ---> <i>using the float address containers for shared memory by column/row</i></li>
+        <li><code>[16/01/23][01:15pm]</code> ---> <code>CorbCell</code> ---> <i>needs to also do the same for the column/row index</i></li>
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
         <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
@@ -400,6 +418,7 @@
             </ul>
         </li>
         <li><code>[14/01/23][01:36pm]</code> ---> <i>currently cell isnt its own instance to improve code speed but should be used with references to shared data fields in column/row</i></li>
+        <li><code>[16/01/23][01:13pm]</code> ---> <i>cell also doesnt share the memory for column index or row index</i></li>
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[14/01/23][01:42pm]</code> ---> <i>border is a magic number for cells and grid</i></li>
         <li><code>[14/01/23][01:42pm]</code> ---> <i>no color storage for any ui elements, using magic color values</i></li>
@@ -409,7 +428,9 @@
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[14/01/23][01:42pm]</code> ---> <i>no mouse tracking</i></li>
         <li><code> ----- ----- ----- ----- ----- </code></li>
-        <li><code>[14/01/23][01:42pm]</code> ---> <i></i></li>
+        <li><code>[16/01/23][01:51pm]</code> ---> <i>draws cells from top left without offsetting by grid position</i></li>
+        <li><code> ----- ----- ----- ----- ----- </code></li>
+        <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
         <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
