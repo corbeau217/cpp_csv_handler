@@ -169,7 +169,7 @@ namespace CorbSheet {
          * @brief draw handle thingy
          * 
          */
-        void draw();
+        void draw( float drawOffsetX, float drawOffsetY, float veiwOffsetX, float veiwOffsetY );
 
         // GuiLabel(
         //     (Rectangle){
@@ -492,33 +492,52 @@ namespace CorbSheet {
      * @brief draw handle thingy
      * 
      */
-    void CorbCell::draw(){
+    void CorbCell::draw( float drawOffsetX, float drawOffsetY, float veiwOffsetX, float veiwOffsetY ){
         #ifdef ANNOUNCE_DRAW_CALL
         cout << ".";
         #endif
         // RAYLIB ONLY version
 
+        float drawingAtX = drawOffsetX + (colPosX-veiwOffsetX);
+        float drawingAtY = drawOffsetY + (rowPosY-veiwOffsetY);
+
         // // draw the space
         DrawRectangle(
             // pos
-            static_cast<int>(colPosX),static_cast<int>(rowPosY),
+            static_cast<int>( drawingAtX ),static_cast<int>( drawingAtY ),
             // size
-            static_cast<int>(colSizeWidth),static_cast<int>(rowSizeHeight),
+            static_cast<int>( colSizeWidth ),static_cast<int>( rowSizeHeight ),
             fillColor_default
         );
         // draw the outline
         DrawRectangleLines(
             // pos
-            static_cast<int>(colPosX),static_cast<int>(rowPosY),
+            static_cast<int>( drawingAtX ),static_cast<int>( drawingAtY ),
             // size
-            static_cast<int>(colSizeWidth),static_cast<int>(rowSizeHeight),
+            static_cast<int>( colSizeWidth ),static_cast<int>( rowSizeHeight ),
             borderColor
         );
+
+        // declare/initialise the x pos
+        int drawTextX = static_cast<int>( drawingAtX + ( borderSize*2 ) );
+        // get the y pos ready
+        int drawTextY = 0;
+        // get the change from top left ready
+        float drawTextY_change = ( ( rowSizeHeight - textSize ) / 2.0f );
+        // if it's positive change then we add it
+        if( drawTextY_change > 0.0f ){
+            drawTextY = static_cast<int>( drawingAtY + drawTextY_change );
+        }
+        // otherwise just make it the pos
+        else {
+            drawTextY = static_cast<int>( drawingAtY );
+        }
+
         // draw the text
         DrawText(
             getDrawableText().c_str(),
-            static_cast<int>(colPosX),static_cast<int>(rowPosY),
-            textSize,textColor_default
+            drawTextX, drawTextY,
+            textSize, textColor_default
         );
         // DrawText("TEMPLATE",GetScreenWidth()/2-100,GetScreenHeight()/2,10,BLACK);
 
@@ -668,7 +687,8 @@ namespace CorbSheet {
      * @param rowIndex row index of the cell to set
      */
     void CorbGrid::setCell( int colIndex, int rowIndex, string valueIn ){
-        cellVals[rowIndex][colIndex] = valueIn;
+        // cellVals[rowIndex][colIndex] = valueIn;
+        cells[rowIndex][colIndex]->setText( valueIn );
     }
 
     // ---- ---- ---- ----  ---- ---- ---- ---- 
@@ -703,7 +723,7 @@ namespace CorbSheet {
             for( int currCol = veiwingCol; ( currCol < colCount ) &&
             ( ( colPos[currCol] + colSize[currCol] ) - colPos[ veiwingCol ] ) < space.width; currCol++ ){
                 // tell the cell to draw
-                cells[currRow][currCol]->draw();
+                cells[currRow][currCol]->draw( space.x, space.y, colPos[veiwingCol], rowPos[veiwingRow] );
 
                 // // prepare the current cell space
                 // Rectangle currCellSpace {

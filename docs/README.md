@@ -245,6 +245,8 @@
                     <li><code>[11:52am]</code> ---> <i>changed some minor things in <code>README.md</code></i></li>
                     <li><code>[12:15pm]</code> ---> <i>added in containers for color/border size/text size to the cell objects</i></li>
                     <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[01:16pm]</code> ---> <i>changed over to having variable and offsetting the drawing of cells correctly (not including grid border size)</i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code> ===== ===== ===== ===== ===== </code></li>
