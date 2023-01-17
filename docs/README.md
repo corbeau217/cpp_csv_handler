@@ -247,6 +247,9 @@
                     <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[01:16pm]</code> ---> <i>changed over to having variable and offsetting the drawing of cells correctly (not including grid border size)</i></li>
                     <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[02:27pm]</code> ---> <i>removed defunct overloading of grid's draw method</i></li>
+                    <li><code>[02:27pm]</code> ---> <i>provided functionality for mouse hovering and mouse selection and made the position provided to grid as relative to the view space</i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code> ===== ===== ===== ===== ===== </code></li>

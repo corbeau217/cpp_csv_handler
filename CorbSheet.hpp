@@ -169,7 +169,7 @@ namespace CorbSheet {
          * @brief draw handle thingy
          * 
          */
-        void draw( float drawOffsetX, float drawOffsetY, float veiwOffsetX, float veiwOffsetY );
+        void draw( float drawOffsetX, float drawOffsetY, float veiwOffsetX, float veiwOffsetY, int mouseOverCol, int mouseOverRow );
 
         // GuiLabel(
         //     (Rectangle){
@@ -246,6 +246,9 @@ namespace CorbSheet {
         Rectangle space;
         // where we're veiwing from in the grid
         int veiwingCol, veiwingRow;
+        // where we're hovering the mouse
+        // -1 when not hovering
+        int mouseOverCol, mouseOverRow;
 
         // ==== ==== ==== ====  ==== ==== ==== ==== 
         // constructors/destructors
@@ -300,21 +303,12 @@ namespace CorbSheet {
 
         /**
          * @brief draw handle thingy
+         * @param currMousePos the position of the mouse in the grid view space,
+         *              if -1.0f for both params then it's not within the bounds
          * 
          */
-        void draw(); // just calculate or dont, what we show for now
-        // TODO implement the usage of this
-        //      for now just have it call draw normally
-        /**
-         * @brief draw handle thing
-         * 
-         * @param veiwingColIn top left cell col index
-         * @param veiwingRowIn top left cell row index
-         * @param veiwingColCountIn col count of veiwing area
-         * @param veiwingRowCountIn row count of veiwing area
-         */
-        void draw( int veiwingColIn, int veiwingRowIn, int veiwingColCountIn, int veiwingRowCountIn );
-        
+        void draw( Vector2 currMousePos );
+
         // ==== ==== ==== ====  ==== ==== ==== ==== 
     };
 
@@ -370,9 +364,10 @@ namespace CorbSheet {
 
         /**
          * @brief draw handle thingy
+         * @param mousePosIn the current mouse pos
          * 
          */
-        void draw(); // just calculate or dont, what we show for now
+        void draw( Vector2 mousePosIn ); // just calculate or dont, what we show for now
 
         // ==== ==== ==== ====  ==== ==== ==== ==== 
     };
@@ -492,11 +487,25 @@ namespace CorbSheet {
      * @brief draw handle thingy
      * 
      */
-    void CorbCell::draw( float drawOffsetX, float drawOffsetY, float veiwOffsetX, float veiwOffsetY ){
+    void CorbCell::draw( float drawOffsetX, float drawOffsetY, float veiwOffsetX, float veiwOffsetY, int mouseOverCol, int mouseOverRow ){
         #ifdef ANNOUNCE_DRAW_CALL
         cout << ".";
         #endif
         // RAYLIB ONLY version
+        // color stores
+        Color currFillColor, currTextColor, currBorderColor;
+        // if we're hovering
+        if( mouseOverCol == col && mouseOverRow == row ){
+            // set the colors as the hover vals
+            currFillColor = fillColor_hover;
+            currTextColor = textColor_hover;
+            currBorderColor = borderColor;
+        } else {
+            // set the colors as the default vals
+            currFillColor = fillColor_default;
+            currTextColor = textColor_default;
+            currBorderColor = borderColor;
+        }
 
         float drawingAtX = drawOffsetX + (colPosX-veiwOffsetX);
         float drawingAtY = drawOffsetY + (rowPosY-veiwOffsetY);
@@ -507,7 +516,7 @@ namespace CorbSheet {
             static_cast<int>( drawingAtX ),static_cast<int>( drawingAtY ),
             // size
             static_cast<int>( colSizeWidth ),static_cast<int>( rowSizeHeight ),
-            fillColor_default
+            currFillColor
         );
         // draw the outline
         DrawRectangleLines(
@@ -515,7 +524,7 @@ namespace CorbSheet {
             static_cast<int>( drawingAtX ),static_cast<int>( drawingAtY ),
             // size
             static_cast<int>( colSizeWidth ),static_cast<int>( rowSizeHeight ),
-            borderColor
+            currBorderColor
         );
 
         // declare/initialise the x pos
@@ -537,7 +546,7 @@ namespace CorbSheet {
         DrawText(
             getDrawableText().c_str(),
             drawTextX, drawTextY,
-            textSize, textColor_default
+            textSize, currTextColor
         );
         // DrawText("TEMPLATE",GetScreenWidth()/2-100,GetScreenHeight()/2,10,BLACK);
 
@@ -605,6 +614,9 @@ namespace CorbSheet {
         // setup the veiwing thingies
         veiwingCol = 0;
         veiwingRow = 0;
+        // setup the mouse vars
+        mouseOverCol = -1;
+        mouseOverRow = -1;
 
         // initialise our boolean for col header
         hasColHeader = true;
@@ -708,9 +720,11 @@ namespace CorbSheet {
 
     /**
      * @brief draw handle thingy
+     * @param currMousePos the position of the mouse in the grid view space,
+     *              if -1.0f for both params then it's not within the bounds
      * 
      */
-    void CorbGrid::draw(){ // just calculate or dont, what we show for now
+    void CorbGrid::draw( Vector2 currMousePos ){
         #ifdef ANNOUNCE_DRAW_CALL
         cout << "grid draw call" << endl;
         #endif
@@ -722,9 +736,19 @@ namespace CorbSheet {
             // for every col fully within the veiw space
             for( int currCol = veiwingCol; ( currCol < colCount ) &&
             ( ( colPos[currCol] + colSize[currCol] ) - colPos[ veiwingCol ] ) < space.width; currCol++ ){
+                // check if our mouse is inside the position of the cell
+                if( ((currMousePos.x+colPos[ veiwingCol ] >= colPos[currCol])                 && (currMousePos.y+rowPos[ veiwingRow ] >= rowPos[currRow])) &&
+                    ((currMousePos.x+colPos[ veiwingCol ] < colPos[currCol]+colSize[currCol]) && (currMousePos.y+rowPos[ veiwingRow ] < rowPos[currRow]+rowSize[currRow])) ){
+                    // we're hovering this cell
+                    mouseOverCol = currCol;
+                    mouseOverRow = currRow;
+                }
+                else{
+                    mouseOverCol = -1;
+                    mouseOverRow = -1;
+                }
                 // tell the cell to draw
-                cells[currRow][currCol]->draw( space.x, space.y, colPos[veiwingCol], rowPos[veiwingRow] );
-
+                cells[currRow][currCol]->draw( space.x, space.y, colPos[veiwingCol], rowPos[veiwingRow], mouseOverCol, mouseOverRow );
                 // // prepare the current cell space
                 // Rectangle currCellSpace {
                 //     colPos[currCol] - colPos[ veiwingCol] + space.x,
@@ -741,19 +765,6 @@ namespace CorbSheet {
 
             }
         }
-    }
-    // TODO implement the usage of this
-    //      for now just have it call draw normally
-    /**
-     * @brief draw handle thing
-     * 
-     * @param veiwingColIn top left cell col index
-     * @param veiwingRowIn top left cell row index
-     * @param veiwingColCountIn col count of veiwing area
-     * @param veiwingRowCountIn row count of veiwing area
-     */
-    void CorbGrid::draw( int veiwingColIn, int veiwingRowIn, int veiwingColCountIn, int veiwingRowCountIn ){
-        draw();
     }
 
     // ==== ==== ==== ====  ==== ==== ==== ====  ==== ==== ==== ====  
@@ -795,13 +806,30 @@ namespace CorbSheet {
 
     /**
      * @brief draw handle thingy
+     * @param mousePosIn the current mouse pos
      * 
      */
-    void CorbSheet::draw(){
+    void CorbSheet::draw( Vector2 mousePosIn ){
         #ifdef ANNOUNCE_DRAW_CALL
         cout << endl << "sheet draw call" << endl;
         #endif
-        grid->draw();
+        // prepare the mouse pos
+        Vector2 giveableMousePos = { mousePosIn.x, mousePosIn.y };
+        // calculate if it's inside bounds
+        if(
+            ( ( mousePosIn.x < grid->space.x ) && 
+              ( mousePosIn.y < grid->space.y ) )       &&
+            ( ( mousePosIn.x >= grid->space.x+grid->space.width ) &&
+              ( mousePosIn.y >= grid->space.y+grid->space.height ) )
+        ){
+            giveableMousePos = { -1.0f, -1.0f };
+        } else {
+            // make it relative to the grid
+            giveableMousePos.x -= grid->space.x;
+            giveableMousePos.y -= grid->space.y;
+        }
+        // do the draw handoff
+        grid->draw( giveableMousePos );
     }
 
     // ==== ==== ==== ====  ==== ==== ==== ====  ==== ==== ==== ====  

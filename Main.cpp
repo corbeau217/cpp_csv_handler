@@ -349,7 +349,7 @@ void appHandle(){
         BeginDrawing();
             ClearBackground(GRAY);
 
-            corbSheet->draw();
+            corbSheet->draw( GetMousePosition() );
 
             // // test content
             // DrawText("TEMPLATE",GetScreenWidth()/2-100,GetScreenHeight()/2,20,BLACK);
