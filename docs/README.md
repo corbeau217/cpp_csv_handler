@@ -237,6 +237,20 @@
                 </ul>
             </details>
         </li>
+        <li><code>[17/01/23]</code> ---> <i>changes on this day</i>
+            <details>
+                <summary><i>show / hide</i></summary>
+                <ul>
+                    <li><code> ===== ===== ===== ===== ===== </code></li>
+                    <li><code>[11:52am]</code> ---> <i>changed some minor things in <code>README.md</code></i></li>
+                    <li><code>[12:15pm]</code> ---> <i>added in containers for color/border size/text size to the cell objects</i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code> ===== ===== ===== ===== ===== </code></li>
+                </ul>
+            </details>
+        </li>
         <li></li>
         <li></li>
     </ul>
@@ -279,9 +293,9 @@
                             <!-- ======================================== -->
                             <li><code>[10/01/23][01:05pm]</code> ---> <i>change to the structure of our <code>CorbSheet</code> code:</i>
                                 <ul>
-                                    <li><s>has offset for position of drawing pixels</s></li>
+                                    <li><s>has offset for position of drawing pixels</s></li> <!-- ye -->
                                     <li><i>uses drawable structure from other projects</i></li>
-                                    <li><s>calculates a cell's position and size when the table is loaded</s></li>
+                                    <li><s>calculates a cell's position and size when the table is loaded</s></li> <!-- ye -->
                                     <li><i>change to file formatting</i>
                                         <ul>
                                             <li><i>use some sort of seperator for each table contained in a file including table name</i></li>
@@ -306,7 +320,7 @@
         <!-- === beginning of ideas for this repo === -->
         <!-- ======================================== -->
         <li><code> ----- ----- ----- ----- ----- </code></li>
-        <li><code>[13/01/23][05:28pm]</code> ---> <i>change the cell structure to be holding references for positioning, where the references are to data held in grid shared for a column or a row</i></li>
+        <li><code>[13/01/23][05:28pm]</code> ---> <s>change the cell structure to be holding references for positioning, where the references are to data held in grid shared for a column or a row</s></li> <!-- ye -->
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
         <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
@@ -351,12 +365,12 @@
                                             <ul>
                                                 <li><i>hover col/row index</i></li>
                                                 <li><i>background/border color</i></li>
-                                                <li><s><code>colWidthPx</code> as a list</s></li>
+                                                <li><s><code>colWidthPx</code> as a list</s></li> <!-- ye -->
                                             </ul>
                                         </li>
                                         <li><i><code>CorbSheet</code> code handle for:</i>
                                             <ul>
-                                                <li><s>veiwing col/row index and veiwing col/row count code</s></li>
+                                                <li><s>veiwing col/row index and veiwing col/row count code</s></li> <!-- ye -->
                                                 <li><i>mouse position translation to viewing row/col index</i></li>
                                                 <li><i>data handle inputing into the grid instance from 2D list of strings</i></li>
                                             </ul>
@@ -374,12 +388,12 @@
         <!-- === beginning of tasks for this repo === -->
         <!-- ======================================== -->
         <li><code> ----- ----- ----- ----- ----- </code></li>
-        <li><code>[13/01/23][02:53pm]</code> ---> <code>CorbGrid</code> ---> <s>change column size and row size to list</s></li>
-        <li><code>[13/01/23][02:53pm]</code> ---> <code>CorbGrid</code> ---> <s>add in the position vars as list for col and row</s></li>
-        <li><code>[13/01/23][02:53pm]</code> ---> <code>CorbGrid</code> ---> <s>add in 2D vector of strings</s></li>
-        <li><code>[13/01/23][02:53pm]</code> ---> <code>CorbGrid</code> ---> <s>change draw to using the new available values instead of the <code>CorbCell</code> instances</s></li>
+        <li><code>[13/01/23][02:53pm]</code> ---> <code>CorbGrid</code> ---> <s>change column size and row size to list</s></li> <!-- ye -->
+        <li><code>[13/01/23][02:53pm]</code> ---> <code>CorbGrid</code> ---> <s>add in the position vars as list for col and row</s></li> <!-- ye -->
+        <li><code>[13/01/23][02:53pm]</code> ---> <code>CorbGrid</code> ---> <s>add in 2D vector of strings</s></li> <!-- ye -->
+        <li><code>[13/01/23][02:53pm]</code> ---> <code>CorbGrid</code> ---> <s>change draw to using the new available values instead of the <code>CorbCell</code> instances</s></li> <!-- ye -->
         <li><code> ----- ----- ----- ----- ----- </code></li>
-        <li><code>[13/01/23][03:56pm]</code> ---> <code>CorbGrid</code> ---> <s>have the veiwing things calculated as asking if they're inside the veiwing space</s></li>
+        <li><code>[13/01/23][03:56pm]</code> ---> <code>CorbGrid</code> ---> <s>have the veiwing things calculated as asking if they're inside the veiwing space</s></li> <!-- ye -->
         <!-- ---------------------------------------- -->
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[13/01/23][05:09pm]</code> ---> <code>CorbGrid</code> ---> <i>change to using a <code>CorbRectangle</code> or <code>CorbCellDrawLocation</code></i></li>

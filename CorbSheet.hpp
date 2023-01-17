@@ -50,6 +50,8 @@ namespace CorbSheet {
         float &height;           // space height
     } RefSpace;
 
+    // TODO have each cell contain a reference address to the grid draw offset or provided in paint
+    // TODO have a container for colors
     /**
      * @brief is an area of the raygui that draws a box, and then a label over the top
      * 
@@ -81,12 +83,41 @@ namespace CorbSheet {
         // height var holding a reference to the row's size
         float &rowSizeHeight;
 
+        // border vars
+
+        int borderSize;
+
         // grid positioning fields
         int col,row;
+
         // the label string this cell has
         // TODO change to have paint provide the cell's data
         //      this allows a cell to just be a structure of fixed size that is used by the grid to produce a cell
         string value;
+
+        // text vars
+
+        // text size of the cell
+        int textSize;
+        
+        // color vars
+
+        // the fill of the cell color when not selected or hovered
+        Color fillColor_default;
+        // the fill of the cell color when mouse hovered
+        Color fillColor_hover;
+        // the fill of the cell color when selected
+        Color fillColor_selected;
+
+        // the text color when not selected or hovered
+        Color textColor_default;
+        // the text color when mouse hovered
+        Color textColor_hover;
+        // the text color when selected
+        Color textColor_selected;
+
+        // the color of the border for this cell
+        Color borderColor;
 
         // ==== ==== ==== ====  ==== ==== ==== ==== 
         // constructors/destructors
@@ -386,12 +417,34 @@ namespace CorbSheet {
         colSizeWidth {colSizeIn},
         rowSizeHeight {rowSizeIn}
     {
+        // initialise border vars
+
+        borderSize = 1;
+
+        // initialise standard vars
+
         // initialise col index
         col = xIdxIn;
         // initialise row index
         row = yIdxIn;
         // initialise the value
         value = "";
+
+        // initialise the text vars
+
+        textSize = 10;
+
+        // initialise the color vars
+
+        fillColor_default = WHITE;
+        fillColor_hover = DARKBLUE;
+        fillColor_selected = LIGHTGRAY;
+
+        textColor_default = DARKBLUE;
+        textColor_hover = WHITE;
+        textColor_selected = DARKBLUE;
+
+        borderColor = BLACK;
     }
 
     // ---- ---- ---- ----  ---- ---- ---- ---- 
@@ -451,7 +504,7 @@ namespace CorbSheet {
             static_cast<int>(colPosX),static_cast<int>(rowPosY),
             // size
             static_cast<int>(colSizeWidth),static_cast<int>(rowSizeHeight),
-            WHITE
+            fillColor_default
         );
         // draw the outline
         DrawRectangleLines(
@@ -459,19 +512,19 @@ namespace CorbSheet {
             static_cast<int>(colPosX),static_cast<int>(rowPosY),
             // size
             static_cast<int>(colSizeWidth),static_cast<int>(rowSizeHeight),
-            BLACK
+            borderColor
         );
         // draw the text
         DrawText(
             getDrawableText().c_str(),
             static_cast<int>(colPosX),static_cast<int>(rowPosY),
-            10,BLACK
+            textSize,textColor_default
         );
         // DrawText("TEMPLATE",GetScreenWidth()/2-100,GetScreenHeight()/2,10,BLACK);
 
         // RAYGUI version
         // // draw the cell background
-        // GuiDrawRectangle(space,1,DARKGRAY,WHITE);
+        // GuiDrawRectangle(space,borderSize,DARKGRAY,WHITE);
         // // draw the text
         // GuiLabel( space, getDrawableText().c_str() );
         // // what it calls
