@@ -212,6 +212,8 @@ namespace CorbSheet {
         
         // grid max vals
         int colCount,rowCount;
+        // the size of the border
+        float borderSize;
         // header checkers
         bool hasColHeader,hasRowHeader;
         // TODO update to use references so we can have
@@ -249,6 +251,17 @@ namespace CorbSheet {
         // where we're hovering the mouse
         // -1 when not hovering
         int mouseOverCol, mouseOverRow;
+
+        // ---- ---- ----  ---- ---- ---- 
+        // color vars
+
+        // base fill color var
+        Color fillColor_default;
+        // base border color var
+        Color borderColor_default;
+
+        // hover border color var
+        Color borderColor_hover;
 
         // ==== ==== ==== ====  ==== ==== ==== ==== 
         // constructors/destructors
@@ -575,6 +588,9 @@ namespace CorbSheet {
         // initialise the row count
         rowCount = rowCountIn;
 
+        // initialise border size data member
+        borderSize = 3.0f;
+
         // prepare some stores
         float prevPos = 0.0f;
         float prevSize = 0.0f;
@@ -659,6 +675,14 @@ namespace CorbSheet {
             // push the row vals list to overall vals
             cellVals.push_back( currRowVals );
         }
+
+        // setup color data members
+
+        fillColor_default = LIGHTGRAY;
+        borderColor_default = BLACK;
+
+        borderColor_hover = DARKBLUE;
+
     }
 
     // ---- ---- ---- ----  ---- ---- ---- ---- 
@@ -729,13 +753,13 @@ namespace CorbSheet {
         cout << "grid draw call" << endl;
         #endif
         // draw the grid background/border
-        GuiDrawRectangle(space,3,BLACK,LIGHTGRAY);
+        GuiDrawRectangle(space,static_cast<int>(borderSize),borderColor_default,fillColor_default);
         // for every row fully within the veiw space
         for( int currRow = veiwingRow; ( currRow < rowCount ) &&
-            ( ( rowPos[currRow] + rowSize[currRow] ) - rowPos[ veiwingRow ] ) < space.height; currRow++ ){
+            ( ( rowPos[currRow] + rowSize[currRow] ) - rowPos[ veiwingRow ] ) < space.height-(borderSize*2.0f); currRow++ ){
             // for every col fully within the veiw space
             for( int currCol = veiwingCol; ( currCol < colCount ) &&
-            ( ( colPos[currCol] + colSize[currCol] ) - colPos[ veiwingCol ] ) < space.width; currCol++ ){
+            ( ( colPos[currCol] + colSize[currCol] ) - colPos[ veiwingCol ] ) < space.width-(borderSize*2.0f); currCol++ ){
                 // check if our mouse is inside the position of the cell
                 if( ((currMousePos.x+colPos[ veiwingCol ] >= colPos[currCol])                 && (currMousePos.y+rowPos[ veiwingRow ] >= rowPos[currRow])) &&
                     ((currMousePos.x+colPos[ veiwingCol ] < colPos[currCol]+colSize[currCol]) && (currMousePos.y+rowPos[ veiwingRow ] < rowPos[currRow]+rowSize[currRow])) ){
@@ -748,7 +772,7 @@ namespace CorbSheet {
                     mouseOverRow = -1;
                 }
                 // tell the cell to draw
-                cells[currRow][currCol]->draw( space.x, space.y, colPos[veiwingCol], rowPos[veiwingRow], mouseOverCol, mouseOverRow );
+                cells[currRow][currCol]->draw( space.x+borderSize, space.y+borderSize, colPos[veiwingCol], rowPos[veiwingRow], mouseOverCol, mouseOverRow );
                 // // prepare the current cell space
                 // Rectangle currCellSpace {
                 //     colPos[currCol] - colPos[ veiwingCol] + space.x,

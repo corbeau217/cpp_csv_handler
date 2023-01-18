@@ -4,7 +4,7 @@
 <!--        Project:    cpp_csv_handler                                                    -->
 <!--         Branch:    main                                                               -->
 <!--        Created:    2023-01-13                                                         -->
-<!--    Last update:    2023-01-14                                                         -->
+<!--    Last update:    2023-01-17                                                         -->
 <!--         Author:    Corbeau217                                                         -->
 <!--                                                                                       -->
 <!--        Repo URL:                                                                      -->
@@ -192,8 +192,6 @@
                     <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[05:23pm]</code> ---> <i>changed the <code>CorbGrid</code> to no longer using a cell instance</i></li>
                     <li><code>[05:23pm]</code> ---> <i>added in a task for suggested cell data handle holding references to the col/row</i></li>
-                    <li><code> ----- ----- ----- ----- ----- </code></li>
-                    <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code> ===== ===== ===== ===== ===== </code></li>
                 </ul>
             </details>
@@ -214,9 +212,6 @@
                     <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[02:04pm]</code> ---> <i>added a testing section to <code>./Main.cpp</code></i></li>
                     <li><code>[03:07pm]</code> ---> <i>provided some tested data for address containers in <code>./Main.cpp</code></i></li>
-                    <li><code> ----- ----- ----- ----- ----- </code></li>
-                    <li><code>[00:00pm]</code> ---> <i></i></li>
-                    <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code> ===== ===== ===== ===== ===== </code></li>
                 </ul>
             </details>
@@ -228,11 +223,6 @@
                     <li><code> ===== ===== ===== ===== ===== </code></li>
                     <li><code>[01:51pm]</code> ---> <i>restructured <code>CorbCell</code> to use a shared reference member for position/size based on col/row</i></li>
                     <li><code>[01:51pm]</code> ---> <i>restructured <code>CorbCell</code> draw method to use <code>raylib</code> methods so each cell isnt required to have a rectangle member</i></li>
-                    <li><code> ----- ----- ----- ----- ----- </code></li>
-                    <li><code>[00:00pm]</code> ---> <i></i></li>
-                    <li><code> ----- ----- ----- ----- ----- </code></li>
-                    <li><code>[00:00pm]</code> ---> <i></i></li>
-                    <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code> ===== ===== ===== ===== ===== </code></li>
                 </ul>
             </details>
@@ -249,6 +239,30 @@
                     <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[02:27pm]</code> ---> <i>removed defunct overloading of grid's draw method</i></li>
                     <li><code>[02:27pm]</code> ---> <i>provided functionality for mouse hovering and mouse selection and made the position provided to grid as relative to the view space</i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code> ===== ===== ===== ===== ===== </code></li>
+                </ul>
+            </details>
+        </li>
+        <li><code>[18/01/23]</code> ---> <i>changes on this day</i>
+            <details>
+                <summary><i>show / hide</i></summary>
+                <ul>
+                    <li><code> ===== ===== ===== ===== ===== </code></li>
+                    <li><code>[12:12pm]</code> ---> <i>cleaned up <code>README.md</code></i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[12:26pm]</code> ---> <i>added in <code>borderSize</code> data member to <code>CorbGrid</code></i></li>
+                    <li><code>[12:26pm]</code> ---> <i>added in <code>Color</code> data members for the fill/border/hovered borders</i></li>
+                    <li><code>[12:26pm]</code> ---> <i>included the border in the draw position of each cell</i></li>
+                    <li><code>[12:26pm]</code> ---> <i>resolved error where it was removing the border offset on draw by not including it in the provided offset</i></li>
+                    <li><code>[12:28pm]</code> ---> <i>after reveiwing changes, notice that border size doesnt need to be included in cell position</i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[12:31pm]</code> ---> <i>as per previous note, removed the border size addition from each cell's position</i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
@@ -399,13 +413,20 @@
         <li><code>[13/01/23][02:53pm]</code> ---> <code>CorbGrid</code> ---> <s>change draw to using the new available values instead of the <code>CorbCell</code> instances</s></li> <!-- ye -->
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[13/01/23][03:56pm]</code> ---> <code>CorbGrid</code> ---> <s>have the veiwing things calculated as asking if they're inside the veiwing space</s></li> <!-- ye -->
+        <li><code> ----- ----- ----- ----- ----- </code></li>
+        <li><code>[16/01/23][01:05pm]</code> ---> <code>CorbCell</code> ---> <s>using the float address containers for shared memory by column/row</s></li> <!-- ye -->
+        <li><code> ----- ----- ----- ----- ----- </code></li>
         <!-- ---------------------------------------- -->
-        <li><code> ----- ----- ----- ----- ----- </code></li>
-        <li><code>[13/01/23][05:09pm]</code> ---> <code>CorbGrid</code> ---> <i>change to using a <code>CorbRectangle</code> or <code>CorbCellDrawLocation</code></i></li>
-        <li><code>[16/01/23][01:05pm]</code> ---> <code>CorbCell</code> ---> <i>using the float address containers for shared memory by column/row</i></li>
-        <li><code>[16/01/23][01:15pm]</code> ---> <code>CorbCell</code> ---> <i>needs to also do the same for the column/row index</i></li>
-        <li><code> ----- ----- ----- ----- ----- </code></li>
-        <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
+        <li><code>[18/01/23][12:33pm]</code> ---> <i>need to restructure mouse position and veiw size calculations to not need to happen as often</i></li>
+        <li><code>[18/01/23][12:33pm]</code> ---> <i>having a calculation for if the mouse is close to a border of a cell</i></li>
+        <li><code>[18/01/23][12:35pm]</code> ---> <i>some method of selecting a cell in the grid or an array of cells in the grid</i></li>
+        <li><code>[18/01/23][12:35pm]</code> ---> <i>a handle for writing to a file the csv information</i>
+            <ul>
+                <li><i>can use O(2N) by having it add each character to the string</i></li>
+                <li><i>then check off if they found a comma in the token at all</i></li>
+                <li><i>once the line is done, sending the whole line to the file</i></li>
+            </ul>
+        </li>
         <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
