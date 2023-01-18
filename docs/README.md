@@ -261,6 +261,8 @@
                     <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[12:31pm]</code> ---> <i>as per previous note, removed the border size addition from each cell's position</i></li>
                     <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[02:05pm]</code> ---> <i>modified the mouse handoff from <code>CorbSheet</code> to <code>CorbGrid</code> so that the offset is handled by the grid</i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code> ----- ----- ----- ----- ----- </code></li>

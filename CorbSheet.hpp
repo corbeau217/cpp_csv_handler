@@ -754,6 +754,9 @@ namespace CorbSheet {
         #endif
         // draw the grid background/border
         GuiDrawRectangle(space,static_cast<int>(borderSize),borderColor_default,fillColor_default);
+        // make the mouse relative to the grid by trimming off the grid position and border size
+        currMousePos.x -= ( space.x + borderSize );
+        currMousePos.y -= ( space.y + borderSize );
         // for every row fully within the veiw space
         for( int currRow = veiwingRow; ( currRow < rowCount ) &&
             ( ( rowPos[currRow] + rowSize[currRow] ) - rowPos[ veiwingRow ] ) < space.height-(borderSize*2.0f); currRow++ ){
@@ -847,10 +850,6 @@ namespace CorbSheet {
               ( mousePosIn.y >= grid->space.y+grid->space.height ) )
         ){
             giveableMousePos = { -1.0f, -1.0f };
-        } else {
-            // make it relative to the grid
-            giveableMousePos.x -= grid->space.x;
-            giveableMousePos.y -= grid->space.y;
         }
         // do the draw handoff
         grid->draw( giveableMousePos );
