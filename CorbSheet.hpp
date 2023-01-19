@@ -216,13 +216,7 @@ namespace CorbSheet {
         float borderSize;
         // header checkers
         bool hasColHeader,hasRowHeader;
-        // TODO update to use references so we can have
-        //      cell specific information
-        // the cells we're using, [y][x] or [row][col]
         vector<vector<CorbCell*>> cells;
-        // TODO remove this as the data storage
-        // data held by each cell
-        vector<vector<string>> cellVals;
         
         // ---- ---- ---- ---- 
         // each column
@@ -297,12 +291,20 @@ namespace CorbSheet {
 
         //...
         /**
+         * @brief get the cell text at the indexed location
+         * 
+         * @param colIndex col index of the cell to get
+         * @param rowIndex row index of the cell to get
+         */
+        string CorbGrid::getText( int colIndex, int rowIndex );
+        
+        /**
          * @brief get the cell pointer at the indexed location
          * 
          * @param colIndex col index of the cell to get
          * @param rowIndex row index of the cell to get
          */
-        string getCell( int colIndex, int rowIndex );
+        CorbCell* getCell( int colIndex, int rowIndex );
 
         /**
          * @brief set the cell pointer at the indexed location
@@ -645,8 +647,6 @@ namespace CorbSheet {
         for( int currRow = 0; currRow < rowCount; currRow++ ){
             // initialise the row list
             vector<CorbCell*> currCellRow;
-            // initialise the curr row list
-            vector<string> currRowVals;
 
             // for every column in a row
             for( int currCol = 0; currCol < colCount; currCol++ ){
@@ -664,16 +664,10 @@ namespace CorbSheet {
 
                 // push to the row list
                 currCellRow.push_back( currCell );
-
-                // push junk to the row vals
-                currRowVals.push_back( "" );
             }
 
             // push the row to the overall cells list
             cells.push_back( currCellRow );
-
-            // push the row vals list to overall vals
-            cellVals.push_back( currRowVals );
         }
 
         // setup color data members
@@ -702,9 +696,17 @@ namespace CorbSheet {
 
     }
 
-    // ---- ---- ---- ----  ---- ---- ---- ---- 
+    // ---- ---- ---- ----  ---- ---- ---- ----
 
-    //...
+    /**
+     * @brief get the cell text at the indexed location
+     * 
+     * @param colIndex col index of the cell to get
+     * @param rowIndex row index of the cell to get
+     */
+    string CorbGrid::getText( int colIndex, int rowIndex ){
+        return cells[rowIndex][colIndex]->getText();
+    }
 
     /**
      * @brief get the cell pointer at the indexed location
@@ -712,8 +714,8 @@ namespace CorbSheet {
      * @param colIndex col index of the cell to get
      * @param rowIndex row index of the cell to get
      */
-    string CorbGrid::getCell( int colIndex, int rowIndex ){
-        return cellVals[rowIndex][colIndex];
+    CorbCell* CorbGrid::getCell( int colIndex, int rowIndex ){
+        return cells[rowIndex][colIndex];
     }
 
     /**
@@ -723,7 +725,6 @@ namespace CorbSheet {
      * @param rowIndex row index of the cell to set
      */
     void CorbGrid::setCell( int colIndex, int rowIndex, string valueIn ){
-        // cellVals[rowIndex][colIndex] = valueIn;
         cells[rowIndex][colIndex]->setText( valueIn );
     }
 

@@ -272,6 +272,22 @@
                 </ul>
             </details>
         </li>
+        <li><code>[18/01/23]</code> ---> <i>changes on this day</i>
+            <details>
+                <summary><i>show / hide</i></summary>
+                <ul>
+                    <li><code> ===== ===== ===== ===== ===== </code></li>
+                    <li><code>[11:53am]</code> ---> <i>updated the <code>getCell</code> in the <code>CorbGrid</code> so it's using the new cell format</i></li>
+                    <li><code>[11:53am]</code> ---> <i>removed the <code>cellVals</code> list from grid, as it's defunct</i></li>
+                    <li><code>[11:56am]</code> ---> <i>added <code>getText</code> to <code>CorbGrid</code></i></li>
+                    <li><code>[11:56am]</code> ---> <i>removed old todo statements and code from <code>CorbGrid</code> that is no longer used</i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code> ===== ===== ===== ===== ===== </code></li>
+                </ul>
+            </details>
+        </li>
         <li></li>
         <li></li>
     </ul>
