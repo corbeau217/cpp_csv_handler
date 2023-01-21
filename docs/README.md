@@ -4,7 +4,7 @@
 <!--        Project:    cpp_csv_handler                                                    -->
 <!--         Branch:    main                                                               -->
 <!--        Created:    2023-01-13                                                         -->
-<!--    Last update:    2023-01-18                                                         -->
+<!--    Last update:    2023-01-22                                                         -->
 <!--         Author:    Corbeau217                                                         -->
 <!--                                                                                       -->
 <!--        Repo URL:                                                                      -->
@@ -27,10 +27,49 @@
 <!-- ===================================================================================== -->
 
 <h2>Useful to user</h2>
-<code>At some point we should update this section to include information useful to users of this client</code>
-<!-- add in to this section information about the folders needed and placement of files -->
-<!-- folders needed in workspace folder: build, external, resources -->
-<!--    inside 'external' folder we need the 'raygui-3.2', and 'raylib-4.2.0', for cmake -->
+<details>
+    <summary><i>show / hide</i></summary>
+    <ul>
+        <li>
+            <li><code> ===== ===== ===== ===== ===== </code></li>
+            <li><i>Required folders (to get the project to work):</i>
+                <ul>
+                    <li><code>~/build/</code></li>
+                    <li><code>~/external/</code></li>
+                    <li><code>~/resources/</code></li>
+                </ul>
+            </li>
+            <li><code> ----- ----- ----- ----- ----- </code></li>
+            <li><i>Required sub projects:</i>
+                <ul>
+                    <li><code>~/external/raygui-3.2</code> (source)</li>
+                    <li><code>~/external/raylib-4.2.0</code> (source)</li>
+                </ul>
+            </li>
+            <li><code> ----- ----- ----- ----- ----- </code></li>
+            <li><i>Repository currently setup for environment (other environments untested):</i>
+                <ul>
+                    <li><code>Macbook pro 15in.</code> --- <code>[2019]</code></li>
+                    <li><code>macOS Big Sur</code> --- <code>[11.7.2]</code></li>
+                    <li><code>VS Code</code> --- <code>[1.74.3]</code></li>
+                    <li><code>cpptools extension</code> --- <code>[1.13.9]</code></li>
+                    <li><i>***Plans to increase useability on other platforms is hindered by my current skill level using cmake***</i></li>
+                </ul>
+            </li>
+            <li><code> ----- ----- ----- ----- ----- </code></li>
+            <li><i>Notes:</i>
+                <ul>
+                    <li><i>Currently this project's <code>cmake</code> does not auto fetch <code>raylib</code>/<code>raygui</code> content</i></li>
+                    <li><i>As at <code>22/1/23</code> <code>07:59AM</code>, raygui functionality isn't used except for <code>CorbGrid</code>'s <code>draw()</code> to make the outline/background and the code from <code>CorbCell</code>'s <code>draw()</code> can be used in its place</i></li>
+                </ul>
+            </li>
+            <li><code> ----- ----- ----- ----- ----- </code></li>
+            <li><i></i></li>
+            <li><i></i></li>
+            <li><code> ===== ===== ===== ===== ===== </code></li>
+        </li>
+    </ul>
+</details>
 
 <!-- ===================================================================================== -->
 <hr /><!-- =============================================================================== -->
@@ -288,6 +327,20 @@
                 </ul>
             </details>
         </li>
+        <li><code>[22/01/23]</code> ---> <i>changes on this day</i>
+            <details>
+                <summary><i>show / hide</i></summary>
+                <ul>
+                    <li><code> ===== ===== ===== ===== ===== </code></li>
+                    <li><code>[08:10am]</code> ---> <i>updated the "useful to user" section of <code>~/docs/README.md</code> to reflect this repository</i></li>
+                    <li><code>[00:00am]</code> ---> <i></i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code>[00:00pm]</code> ---> <i></i></li>
+                    <li><code> ===== ===== ===== ===== ===== </code></li>
+                </ul>
+            </details>
+        </li>
         <li></li>
         <li></li>
     </ul>
@@ -487,6 +540,11 @@
         <li><code>[14/01/23][01:42pm]</code> ---> <i>no mouse tracking</i></li>
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[16/01/23][01:51pm]</code> ---> <i>draws cells from top left without offsetting by grid position</i></li>
+        <li><code> ----- ----- ----- ----- ----- </code></li>
+        <li><code>[22/01/23][08:11am]</code> ---> <i>as highlighted by the "<code>useful to user</code>" section of <code>README.md</code>, this repository requires you to add folders to any pulled copy of it, which should be able to be resolved by ammending <code>~/.gitignore</code></i></li>
+        <li><code>[22/01/23][08:11am]</code> ---> <i>will need to ammend/update the <code>~/CMakeLists.txt</code> to auto fetch the <code>raylib</code>/<code>raygui</code> repositories</i></li>
+        <li><code> ----- ----- ----- ----- ----- </code></li>
+        <li><code>[22/01/23][08:11am]</code> ---> <i>an update was made to the source google sheet that this repository uses for test data which should be considered further down the line (perhaps some sort of webscraping to fetch it automatically?)</i></li>
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
         <li><code>[00/01/23][00:00xx]</code> ---> <i></i></li>
