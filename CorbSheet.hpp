@@ -296,7 +296,7 @@ namespace CorbSheet {
          * @param colIndex col index of the cell to get
          * @param rowIndex row index of the cell to get
          */
-        string CorbGrid::getText( int colIndex, int rowIndex );
+        string getText( int colIndex, int rowIndex );
         
         /**
          * @brief get the cell pointer at the indexed location

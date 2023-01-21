@@ -22,6 +22,12 @@
 <h2>Summary</h2>
 <code>sub project of the animal crossing project to handle csv files using raylib and raygui</code>
 
+<i>Screenshot as at <code>22/01/23</code> <code>08:36AM</code></i>
+<details>
+    <summary><i>show / hide</i></summary>
+    <img src="./screenshot_20230122_0834AM.png" alt="screenshot showing current example of the project UI">
+</details>
+
 <!-- ===================================================================================== -->
 <hr /><!-- =============================================================================== -->
 <!-- ===================================================================================== -->
@@ -333,7 +339,9 @@
                 <ul>
                     <li><code> ===== ===== ===== ===== ===== </code></li>
                     <li><code>[08:10am]</code> ---> <i>updated the "useful to user" section of <code>~/docs/README.md</code> to reflect this repository</i></li>
-                    <li><code>[00:00am]</code> ---> <i></i></li>
+                    <li><code> ----- ----- ----- ----- ----- </code></li>
+                    <li><code>[08:35am]</code> ---> <i>fixed extra qualifier in the <code>CorbGrid</code>'s <code>getText</code> member function</i></li>
+                    <li><code>[08:35am]</code> ---> <i>added screenshot to <code>README.md</code></i></li>
                     <li><code> ----- ----- ----- ----- ----- </code></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
                     <li><code>[00:00pm]</code> ---> <i></i></li>
