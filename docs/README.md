@@ -541,7 +541,7 @@
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[16/01/23][01:51pm]</code> ---> <i>draws cells from top left without offsetting by grid position</i></li>
         <li><code> ----- ----- ----- ----- ----- </code></li>
-        <li><code>[22/01/23][08:11am]</code> ---> <i>as highlighted by the "<code>useful to user</code>" section of <code>README.md</code>, this repository requires you to add folders to any pulled copy of it, which should be able to be resolved by ammending <code>~/.gitignore</code></i></li>
+        <li><code>[22/01/23][08:11am]</code> ---> <i>as highlighted by the "<code>useful to user</code>" section of <code>README.md</code>, this repository requires you to add folders to any fetched copy of it, which should be able to be resolved by ammending <code>~/.gitignore</code></i></li>
         <li><code>[22/01/23][08:11am]</code> ---> <i>will need to ammend/update the <code>~/CMakeLists.txt</code> to auto fetch the <code>raylib</code>/<code>raygui</code> repositories</i></li>
         <li><code> ----- ----- ----- ----- ----- </code></li>
         <li><code>[22/01/23][08:11am]</code> ---> <i>an update was made to the source google sheet that this repository uses for test data which should be considered further down the line (perhaps some sort of webscraping to fetch it automatically?)</i></li>
